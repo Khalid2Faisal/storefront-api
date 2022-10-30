@@ -12,6 +12,7 @@ const {
   POSTGRES_PORT,
 } = process.env;
 
+// eslint-disable-next-line import/no-mutable-exports
 let client;
 
 if (NODE_ENV === "dev") {

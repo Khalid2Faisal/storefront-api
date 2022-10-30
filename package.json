@@ -9,7 +9,9 @@
     "test": "jasmine-ts",
     "tsc": "tsc",
     "migrate:up": "db-migrate up",
-    "migrate:down": "db-migrate down"
+    "migrate:down": "db-migrate down",
+    "lint": "eslint . --ext .ts",
+    "prettier": "prettier --config .prettierrc src/**/*.ts --write"
   },
   "author": "Udacity",
   "license": "ISC",
@@ -30,6 +32,14 @@
     "jasmine-spec-reporter": "^6.0.0",
     "jasmine-ts": "^0.3.0",
     "ts-node": "^9.1.1",
-    "tsc-watch": "^4.2.9"
+    "tsc-watch": "^4.2.9",
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
+    "eslint": "^8.25.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1"
   }
 }

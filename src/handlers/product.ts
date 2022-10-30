@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { Product, ProductsTable } from "../models/user";
+import { ProductsTable } from "../models/product";
 
 const productsTable = new ProductsTable();
 
