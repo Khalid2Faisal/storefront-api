@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import express, { Request, Response } from "express";
 
 import productsRoutes from "../handlers/product";
+import userRoutes from "../handlers/user";
 
 /* Loading the environment variables from the .env file. */
 dotenv.config();
@@ -17,5 +18,6 @@ app.get("/", (req: Request, res: Response) => {
 
 // set routes
 productsRoutes(app);
+userRoutes(app);
 
 export default app;
