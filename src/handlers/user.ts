@@ -4,11 +4,11 @@ import jwt from "jsonwebtoken";
 import verifyAuthToken from "../middlewares/verifyAuthToken";
 import { User } from "../models/user";
 
-const userHandler = new User();
+const userModel = new User();
 
 const index = async (_req: Request, res: Response) => {
   try {
-    const users = await userHandler.index();
+    const users = await userModel.index();
     return res.json(users);
   } catch (err) {
     let errorMessage = "Failed to get users";
@@ -21,7 +21,7 @@ const index = async (_req: Request, res: Response) => {
 
 const show = async (req: Request, res: Response) => {
   try {
-    const user = await userHandler.show(req.params.id);
+    const user = await userModel.show(req.params.id);
     return res.json(user);
   } catch (err) {
     let errorMessage = "Failed to get user";
@@ -34,7 +34,7 @@ const show = async (req: Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
   try {
-    const newUser = await userHandler.create(req.body);
+    const newUser = await userModel.create(req.body);
     const token = jwt.sign({ user: newUser }, process.env.TOKEN_SECRET as string);
     return res.json(token);
   } catch (err) {
@@ -48,7 +48,7 @@ const create = async (req: Request, res: Response) => {
 
 const authenticate = async (req: Request, res: Response) => {
   try {
-    const user = await userHandler.authenticate(req.body);
+    const user = await userModel.authenticate(req.body);
     const token = jwt.sign({ user }, process.env.TOKEN_SECRET as string);
     return res.json(token);
   } catch (err) {
@@ -62,7 +62,7 @@ const authenticate = async (req: Request, res: Response) => {
 
 const update = async (req: Request, res: Response) => {
   try {
-    const user = await userHandler.update(req.params.id, req.body);
+    const user = await userModel.update(req.params.id, req.body);
     return res.json(user);
   } catch (err) {
     let errorMessage = "Failed to update user";
@@ -75,7 +75,7 @@ const update = async (req: Request, res: Response) => {
 
 const remove = async (req: Request, res: Response) => {
   try {
-    const user = await userHandler.delete(req.params.id);
+    const user = await userModel.delete(req.params.id);
     return res.json(user);
   } catch (err) {
     let errorMessage = "Failed to delete user";
