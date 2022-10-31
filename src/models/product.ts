@@ -17,11 +17,18 @@ export class ProductsTable {
 
       const result = await conn.query(sql);
 
+      if (result.rows.length) {
+        const products = result.rows;
+        conn.release();
+        return products;
+      }
+
       conn.release();
 
-      return result.rows;
+      // throw error if products not found
+      throw new Error();
     } catch (err) {
-      throw new Error(`Could not get products. Error: ${err}`);
+      throw new Error("Could not get products");
     }
   }
 }
