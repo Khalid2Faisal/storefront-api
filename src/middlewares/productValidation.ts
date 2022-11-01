@@ -1,34 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 
-export const validateGetProduct = (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.params;
-
-  // check if id exists
-  if (!id) {
-    return res.status(400).json({
-      message: "Error: You must provide 'id'",
-    });
-  }
-
-  // check if id is a number
-  const regex = /^-?\d+$/;
-  if (!regex.test(id)) {
-    return res.status(400).json({
-      message: "id parametermust be numerical",
-    });
-  }
-
-  // check if id is a positive number
-  if (Number(id) < 0) {
-    return res.status(400).json({
-      message: "id parameter must be a positive number",
-    });
-  }
-
-  // continue to the next middleware
-  return next();
-};
-
 export const validateCreateProduct = (
   req: Request,
   res: Response,
@@ -104,36 +75,10 @@ export const validateCreateCategory = (
     });
   }
 
-  // continue to the next middleware
-  return next();
-};
-
-export const validateGetProductsByCategory = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const { id } = req.params;
-
-  // check if category_id exists
-  if (!id) {
+  // name must be a string
+  if (typeof name !== "string") {
     return res.status(400).json({
-      message: "Error: You must provide 'id' parameter",
-    });
-  }
-
-  // check if category_id is a number
-  const regex = /^-?\d+$/;
-  if (!regex.test(id)) {
-    return res.status(400).json({
-      message: "category_id parameter must be numerical",
-    });
-  }
-
-  // check if category_id is a positive number
-  if (Number(id) < 0) {
-    return res.status(400).json({
-      message: "category_id parameter must be a positive number",
+      message: "name must be a string",
     });
   }
 

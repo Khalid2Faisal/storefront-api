@@ -1,13 +1,13 @@
 import express, { Request, Response } from "express";
 
 import {
-  validateGetOrder,
   validateCreateOrder,
   validateUserOrderStatus,
-  validateDeleteOrder,
   validateAddProductToOrder,
 } from "../middlewares/orderValidation";
+import { validateIdParam } from "../middlewares/validate";
 import verifyAuthToken from "../middlewares/verifyAuthToken";
+
 import { Order } from "../models/order";
 
 const orderModel = new Order();
@@ -108,7 +108,7 @@ const addProduct = async (req: Request, res: Response) => {
 
 const orderRoutes = (app: express.Application) => {
   app.get("/orders", verifyAuthToken, index);
-  app.get("/orders/:id", verifyAuthToken, validateGetOrder, show);
+  app.get("/orders/:id", verifyAuthToken, validateIdParam, show);
   app.post("/orders", verifyAuthToken, validateCreateOrder, create);
   app.post("/orders/current", verifyAuthToken, validateUserOrderStatus, currentUserOrder);
   app.post(
@@ -117,10 +117,11 @@ const orderRoutes = (app: express.Application) => {
     validateUserOrderStatus,
     completedUserOrders
   );
-  app.delete("/orders/:id", verifyAuthToken, validateDeleteOrder, deleteOrder);
+  app.delete("/orders/:id", verifyAuthToken, validateIdParam, deleteOrder);
   app.post(
     "/orders/:id/products",
     verifyAuthToken,
+    validateIdParam,
     validateAddProductToOrder,
     addProduct
   );

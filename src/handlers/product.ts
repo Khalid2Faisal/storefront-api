@@ -1,12 +1,12 @@
 import express, { Request, Response } from "express";
 
 import {
-  validateGetProduct,
   validateCreateProduct,
   validateCreateCategory,
-  validateGetProductsByCategory,
 } from "../middlewares/productValidation";
+import { validateIdParam } from "../middlewares/validate";
 import verifyAuthToken from "../middlewares/verifyAuthToken";
+
 import { Product } from "../models/product";
 
 const productModel = new Product();
@@ -79,10 +79,10 @@ const productsByCategory = async (req: Request, res: Response) => {
 
 const productsRoutes = (app: express.Application) => {
   app.get("/products", index);
-  app.get("/products/:id", validateGetProduct, show);
+  app.get("/products/:id", validateIdParam, show);
   app.post("/products", verifyAuthToken, validateCreateProduct, create);
   app.post("/categories", verifyAuthToken, validateCreateCategory, createCategory);
-  app.get("/products/category/:id", validateGetProductsByCategory, productsByCategory);
+  app.get("/products/category/:id", validateIdParam, productsByCategory);
 };
 
 export default productsRoutes;

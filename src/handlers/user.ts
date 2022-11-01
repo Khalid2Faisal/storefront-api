@@ -2,14 +2,13 @@ import express, { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
 import {
-  validateGetUser,
   validateCreateUser,
   validateAuthenticateUser,
   validateUpdateUser,
-  validateRemoveUser,
 } from "../middlewares/userValidation";
-
+import { validateIdParam } from "../middlewares/validate";
 import verifyAuthToken from "../middlewares/verifyAuthToken";
+
 import { User } from "../models/user";
 
 const userModel = new User();
@@ -96,11 +95,11 @@ const remove = async (req: Request, res: Response) => {
 
 const userRoutes = (app: express.Application) => {
   app.get("/users", verifyAuthToken, index);
-  app.get("/users/:id", verifyAuthToken, validateGetUser, show);
+  app.get("/users/:id", verifyAuthToken, validateIdParam, show);
   app.post("/users", validateCreateUser, create);
   app.post("/users/authenticate", validateAuthenticateUser, authenticate);
-  app.patch("/users/:id", verifyAuthToken, validateUpdateUser, update);
-  app.delete("/users/:id", verifyAuthToken, validateRemoveUser, remove);
+  app.patch("/users/:id", verifyAuthToken, validateIdParam, validateUpdateUser, update);
+  app.delete("/users/:id", verifyAuthToken, validateIdParam, remove);
 };
 
 export default userRoutes;
