@@ -2,6 +2,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import express, { Request, Response } from "express";
 
+import orderRoutes from "../handlers/order";
 import productsRoutes from "../handlers/product";
 import userRoutes from "../handlers/user";
 
@@ -19,5 +20,6 @@ app.get("/", (req: Request, res: Response) => {
 // set routes
 productsRoutes(app);
 userRoutes(app);
+orderRoutes(app);
 
 export default app;
