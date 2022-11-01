@@ -105,7 +105,7 @@ export class User {
         }
       }
       conn.release();
-      throw new Error();
+      throw new Error("You've entered an invalid email or password.");
     } catch (err) {
       throw new Error(`Could not authenticate user ${usr.email}. ${err}`);
     }
