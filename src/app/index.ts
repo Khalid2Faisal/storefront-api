@@ -1,4 +1,5 @@
 import bodyParser from "body-parser";
+import cors from "cors";
 import dotenv from "dotenv";
 import express, { Request, Response } from "express";
 
@@ -10,6 +11,14 @@ import userRoutes from "../handlers/user";
 dotenv.config();
 
 const app: express.Application = express();
+
+/* A configuration object for the cors middleware. */
+const corsOptions = {
+  origin: "http://domain.com",
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
