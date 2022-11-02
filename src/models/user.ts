@@ -111,7 +111,7 @@ export class User {
     }
   }
 
-  async update(id: string, usr: UserType): Promise<UserReturningType> {
+  async update(id: string, usr: Partial<UserType>): Promise<UserReturningType> {
     try {
       // check if the usr exists and has a password field
       if (usr && usr.password) {

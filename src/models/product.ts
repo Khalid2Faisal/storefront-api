@@ -2,7 +2,7 @@
 import Client from "../database/client";
 
 export type ProductType = {
-  id: number;
+  id?: number;
   name: string;
   price: number;
   category_id: number;

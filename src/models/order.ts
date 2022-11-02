@@ -2,16 +2,18 @@
 import Client from "../database/client";
 
 export type OrderProduct = {
-  id: number;
-  quantity: number;
-  product_id: number;
+  id?: number;
+  quantity: number | string;
+  product_id: number | string;
 };
 
+// OrderProductReturning type is the same as OrderProduct but with the oreder_id property.
+export type OrderProductReturning = OrderProduct & { order_id: number | string };
+
 export type OrderType = {
-  id: number;
+  id?: number;
   status: string;
-  user_id: number;
-  products: OrderProduct[];
+  user_id: number | string;
 };
 
 export class Order {
@@ -66,7 +68,7 @@ export class Order {
       conn.release();
       return order;
     } catch (err) {
-      throw new Error("Could not add new order");
+      throw new Error(`Could not add new order. ${err}`);
     }
   }
 
@@ -102,7 +104,7 @@ export class Order {
     }
   }
 
-  async currentOrderByUser(id: number): Promise<OrderType> {
+  async currentOrdersByUser(id: number): Promise<OrderType[]> {
     try {
       // @ts-ignore
       const conn = await Client.connect();
@@ -111,9 +113,9 @@ export class Order {
       const result = await conn.query(sql, [id, "active"]);
 
       if (result.rows.length) {
-        const order = result.rows[0];
+        const orders = result.rows;
         conn.release();
-        return order;
+        return orders;
       }
 
       conn.release();
@@ -121,7 +123,7 @@ export class Order {
       // throw error if order not found
       throw new Error();
     } catch (err) {
-      throw new Error(`Could not find order for the user with the id ${id}`);
+      throw new Error(`Could not find order for the user with the id ${id}. ${err}`);
     }
   }
 
@@ -141,7 +143,7 @@ export class Order {
     }
   }
 
-  async addProduct(id: number, p: OrderProduct): Promise<OrderProduct> {
+  async addProduct(id: number, p: OrderProduct): Promise<OrderProductReturning> {
     try {
       // @ts-ignore
       const conn = await Client.connect();

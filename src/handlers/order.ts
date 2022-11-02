@@ -53,7 +53,7 @@ const create = async (req: Request, res: Response) => {
 
 const currentUserOrder = async (req: Request, res: Response) => {
   try {
-    const order = await orderModel.currentOrderByUser(req.body.user_id);
+    const order = await orderModel.currentOrdersByUser(req.body.user_id);
     return res.json(order);
   } catch (err) {
     let errorMessage = "Failed to get current order";
