@@ -5,8 +5,8 @@ import { hashPassword, comparePassword } from "../utilities/encrypt";
 
 export type UserType = {
   id?: number;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   email: string;
   password: string;
 };
@@ -70,8 +70,8 @@ export class User {
 
       const hashedPassword = hashPassword(usr.password);
       const result = await conn.query(sql, [
-        usr.firstName,
-        usr.lastName,
+        usr.firstname,
+        usr.lastname,
         usr.email,
         hashedPassword,
       ]);
@@ -81,7 +81,7 @@ export class User {
 
       return user;
     } catch (err) {
-      throw new Error(`Could not add new user ${usr.firstName}. ${err}`);
+      throw new Error(`Could not add new user ${usr.firstname}. ${err}`);
     }
   }
 
@@ -98,8 +98,8 @@ export class User {
           conn.release();
           return {
             id: user.id,
-            firstName: user.firstname,
-            lastName: user.lastname,
+            firstname: user.firstname,
+            lastname: user.lastname,
             email: user.email,
           };
         }
