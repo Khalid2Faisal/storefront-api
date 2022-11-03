@@ -1,19 +1,19 @@
 import { Request, Response, NextFunction } from "express";
 
 export const validateCreateUser = (req: Request, res: Response, next: NextFunction) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstname, lastname, email, password } = req.body;
 
   // check if firstname exists
-  if (!firstName) {
+  if (!firstname) {
     return res.status(400).json({
-      message: "Error: You must provide 'firstName'",
+      message: "Error: You must provide 'firstname'",
     });
   }
 
-  // check if lastName exists
-  if (!lastName) {
+  // check if lastname exists
+  if (!lastname) {
     return res.status(400).json({
-      message: "Error: You must provide 'lastName'",
+      message: "Error: You must provide 'lastname'",
     });
   }
 
@@ -84,13 +84,13 @@ export const validateAuthenticateUser = (
 };
 
 export const validateUpdateUser = (req: Request, res: Response, next: NextFunction) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstname, lastname, email, password } = req.body;
 
   // check that at least one field is provided
-  if (!firstName && !lastName && !email && !password) {
+  if (!firstname && !lastname && !email && !password) {
     return res.status(400).json({
       message:
-        "Error: You must provide at least one field of 'firstName', 'lastName', 'email', 'password' to update",
+        "Error: You must provide at least one field of 'firstname', 'lastname', 'email', 'password' to update",
     });
   }
 
