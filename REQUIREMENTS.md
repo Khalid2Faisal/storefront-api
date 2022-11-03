@@ -94,3 +94,58 @@ These are the notes from a meeting with the frontend developer that describe wha
 - quantity
 - order_id
 - product_id
+
+## Database Schema
+![Database Schema](https://res.cloudinary.com/khalid-faisal/image/upload/v1667512473/Personal/storefront-api-db-schema_xvgzmm.png)
+
+User Schema
+```sql
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  firstName VARCHAR(255) NOT NULL,
+  lastName VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL
+);
+```
+
+Category Schema
+```sql
+CREATE TABLE categories (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
+```
+
+Product Schema
+```sql
+CREATE TABLE products (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  price INTEGER NOT NULL,
+  category_id INTEGER NOT NULL,
+  FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+```
+
+Order Schema
+```sql
+CREATE TABLE orders (
+  id SERIAL PRIMARY KEY,
+  status VARCHAR(20) NOT NULL,
+  user_id bigint NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+```
+
+OrderProducts Schema
+```sql
+CREATE TABLE order_products (
+  id SERIAL PRIMARY KEY,
+  quantity INTEGER NOT NULL,
+  order_id bigint NOT NULL,
+  product_id bigint NOT NULL,
+  FOREIGN KEY (order_id) REFERENCES orders(id),
+  FOREIGN KEY (product_id) REFERENCES products(id)
+);
+```
