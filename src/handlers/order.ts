@@ -51,12 +51,12 @@ const create = async (req: Request, res: Response) => {
   }
 };
 
-const currentUserOrder = async (req: Request, res: Response) => {
+const currentUserOrders = async (req: Request, res: Response) => {
   try {
-    const order = await orderModel.currentOrdersByUser(req.body.user_id);
-    return res.json(order);
+    const orders = await orderModel.currentOrdersByUser(req.body.user_id);
+    return res.json(orders);
   } catch (err) {
-    let errorMessage = "Failed to get current order";
+    let errorMessage = "Failed to get current orders";
     if (err instanceof Error) {
       errorMessage = err.message;
     }
@@ -66,10 +66,10 @@ const currentUserOrder = async (req: Request, res: Response) => {
 
 const completedUserOrders = async (req: Request, res: Response) => {
   try {
-    const order = await orderModel.completedOrdersByUser(req.body.user_id);
-    return res.json(order);
+    const orders = await orderModel.completedOrdersByUser(req.body.user_id);
+    return res.json(orders);
   } catch (err) {
-    let errorMessage = "Failed to complete order";
+    let errorMessage = "Failed to complete orders";
     if (err instanceof Error) {
       errorMessage = err.message;
     }
@@ -110,7 +110,12 @@ const orderRoutes = (app: express.Application) => {
   app.get("/orders", verifyAuthToken, index);
   app.get("/orders/:id", verifyAuthToken, validateIdParam, show);
   app.post("/orders", verifyAuthToken, validateCreateOrder, create);
-  app.post("/orders/current", verifyAuthToken, validateUserOrderStatus, currentUserOrder);
+  app.post(
+    "/orders/current",
+    verifyAuthToken,
+    validateUserOrderStatus,
+    currentUserOrders
+  );
   app.post(
     "/orders/completed",
     verifyAuthToken,
