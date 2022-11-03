@@ -6,7 +6,7 @@ import Client from "../../database/client";
 
 const request = supertest(app);
 
-describe("User Model", () => {
+describe("User Handler", () => {
   let token: string;
 
   afterAll(async () => {
@@ -16,7 +16,6 @@ describe("User Model", () => {
     const sql = "DELETE FROM users;\n ALTER SEQUENCE users_id_seq RESTART WITH 1";
     await conn.query(sql);
     conn.release();
-    console.log("\nAll data deleted from the users table.");
   });
 
   it("POST /users endpoint should create new user", async () => {

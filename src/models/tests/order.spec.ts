@@ -22,8 +22,6 @@ describe("Order Model", () => {
       price: 1000,
       category_id: 1,
     });
-
-    console.log("inserted a user, a category and a product before all order tests");
   });
 
   afterAll(async () => {
@@ -34,9 +32,6 @@ describe("Order Model", () => {
       "DELETE FROM order_products;\n ALTER SEQUENCE order_products_id_seq RESTART WITH 1;\n DELETE FROM orders;\n ALTER SEQUENCE orders_id_seq RESTART WITH 1;\n DELETE FROM users;\n ALTER SEQUENCE users_id_seq RESTART WITH 1;\nDELETE FROM products;\n ALTER SEQUENCE products_id_seq RESTART WITH 1;\nDELETE FROM categories;\n ALTER SEQUENCE categories_id_seq RESTART WITH 1;";
     await conn.query(sql);
     conn.release();
-    console.log(
-      "\nAll data deleted from the orders, users, products, and categories tables."
-    );
   });
 
   it("should have an index method", () => {

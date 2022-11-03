@@ -13,7 +13,6 @@ describe("Product Model", () => {
       "DELETE FROM products;\n ALTER SEQUENCE products_id_seq RESTART WITH 1;\n DELETE FROM categories;\n ALTER SEQUENCE categories_id_seq RESTART WITH 1";
     await conn.query(sql);
     conn.release();
-    console.log("\nAll data deleted from the products and categories tables.");
   });
 
   it("should have an index method", () => {

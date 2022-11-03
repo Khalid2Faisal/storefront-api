@@ -12,7 +12,6 @@ describe("User Model", () => {
     const sql = "DELETE FROM users;\n ALTER SEQUENCE users_id_seq RESTART WITH 1";
     await conn.query(sql);
     conn.release();
-    console.log("\nAll data deleted from the users table.");
   });
 
   it("should have an index method", () => {
