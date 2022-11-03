@@ -20,7 +20,7 @@ const index = async (_req: Request, res: Response) => {
     if (err instanceof Error) {
       errorMessage = err.message;
     }
-    return res.status(400).json({ message: errorMessage });
+    return res.status(500).json({ message: errorMessage });
   }
 };
 
@@ -33,7 +33,7 @@ const show = async (req: Request, res: Response) => {
     if (err instanceof Error) {
       errorMessage = err.message;
     }
-    return res.status(400).json({ message: errorMessage });
+    return res.status(500).json({ message: errorMessage });
   }
 };
 
@@ -46,7 +46,7 @@ const create = async (req: Request, res: Response) => {
     if (err instanceof Error) {
       errorMessage = err.message;
     }
-    return res.status(400).json({ message: errorMessage });
+    return res.status(500).json({ message: errorMessage });
   }
 };
 
@@ -60,7 +60,7 @@ const createCategory = async (req: Request, res: Response) => {
     if (err instanceof Error) {
       errorMessage = err.message;
     }
-    return res.status(400).json({ message: errorMessage });
+    return res.status(500).json({ message: errorMessage });
   }
 };
 
@@ -73,7 +73,7 @@ const productsByCategory = async (req: Request, res: Response) => {
     if (err instanceof Error) {
       errorMessage = err.message;
     }
-    return res.status(400).json({ message: errorMessage });
+    return res.status(500).json({ message: errorMessage });
   }
 };
 
