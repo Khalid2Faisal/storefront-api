@@ -36,6 +36,29 @@ npm run prettier
 7. `npm run lint`: Run the linter
 8. `npm run prettier`: Run prettier
 
+## .env variables
+
+```bash
+# app configuraion
+PORT=8080
+NODE_ENV=dev
+
+# Database configuration
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5433
+POSTGRES_DB=store
+POSTGRES_DB_TEST=store_test
+POSTGRES_USER=storefront-node-app
+POSTGRES_PASSWORD=postgres1234
+
+# bcrypt configuration
+BCRYPT_PASSWORD=GD52FDGfd5fdg714yul
+SALT_ROUNDS=10
+
+# jwt configuration
+TOKEN_SECRET=jsh54KH78dsks1wqJQ64
+```
+
 ## Endpoints
 
 All the endpoints are documented in the REQUIREMENTS.md file
